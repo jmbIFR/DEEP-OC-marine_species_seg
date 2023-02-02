@@ -33,7 +33,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         curl \
         nano \
         python3-pip \
+        python3-venv \
     && rm -rf /var/lib/apt/lists/*
+
+
+# Create and activate python virtual env
+RUN python3 -m venv --system-site-packages /srv/.py-venv
+
+RUN echo ". /srv/.py-venv/bin/activate" > ~/.bashrc && \
+    echo "PATH=/srv/.py-venv/bin/:$PATH" > ~/.profile
+
+ENV PATH /srv/.py-venv/bin/:$PATH
 
 # Update python packages
 # [!] Remember: DEEP API V2 only works with python>=3.6
