@@ -1,6 +1,6 @@
 {
     "title": "marine_species_seg",
-    "summary": "WIP : Identification of marine species from EMSO Azores deep-sea obervatory",
+    "summary": "WIP :  Identification of marine species from EMSO Azores deep-sea obervatory",
     "description": [
         "marine_species_seg is an application using the DEEPaaS API.\n",
         "Write additional information for your users (how to predict, how to retrain,",
