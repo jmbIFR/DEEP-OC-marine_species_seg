@@ -88,7 +88,7 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app
-RUN git clone -b $branch https://gitlab.ifremer.fr/jb06098/marine_species_seg && \
+RUN git clone -b $branch https://github.com/jmbIFR/marine_species_seg && \
     cd  marine_species_seg && \
     pip3 install --no-cache-dir -e . && \
     cd ..

@@ -5,7 +5,7 @@
 # DEEP-OC-marine_species_seg
 [![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/UC-jb06098-DEEP-OC-marine_species_seg/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/UC-jb06098-DEEP-OC-marine_species_seg/job/master)
 
-This is a container that will run the [marine_species_seg](https://gitlab.ifremer.fr/jb06098/marine_species_seg) application leveraging the DEEP as a Service API component ([DEEPaaS API V2](https://github.com/indigo-dc/DEEPaaS)).
+This is a container that will run the [marine_species_seg](https://github.com/jmbIFR/marine_species_seg) application leveraging the DEEP as a Service API component ([DEEPaaS API V2](https://github.com/indigo-dc/DEEPaaS)).
 
     
 ## Running the container
@@ -26,7 +26,7 @@ This command will pull the Docker container from the Docker Hub [deephdc](https:
 
 If you want to build the container directly in your machine (because you want to modify the `Dockerfile` for instance) follow the following instructions:
 ```bash
-git clone https://gitlab.ifremer.fr/jb06098/DEEP-OC-marine_species_seg
+git clone https://github.com/jmbIFR/DEEP-OC-marine_species_seg
 cd DEEP-OC-marine_species_seg
 docker build -t deephdc/uc-jb06098-deep-oc-marine_species_seg .
 docker run -ti -p 5000:5000 -p 6006:6006 -p 8888:8888 deephdc/uc-jb06098-deep-oc-marine_species_seg
