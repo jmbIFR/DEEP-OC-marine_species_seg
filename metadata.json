@@ -14,7 +14,7 @@
     "date_creation": "2023-02-02",
     "sources": {
 		"dockerfile_repo": "https://github.com/jmbIFR/DEEP-OC-marine_species_seg",
-		"docker_registry_repo": "deephdc/uc-jmbIFR-deep-oc-marine_species_seg",
+		"docker_registry_repo": "deephdc/uc-jmbifr-deep-oc-marine_species_seg",
 		"code": "https://github.com/jmbIFR/marine_species_seg"
 	},
     "continuous_integration": {
