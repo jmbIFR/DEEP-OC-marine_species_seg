@@ -1,6 +1,6 @@
 {
     "title": "marine_species_seg",
-    "summary": "WIP : Identification of marine species from EMSO Azores deep-sea obervatory",
+    "summary": "WIP :  Identification of marine species from EMSO Azores deep-sea obervatory",
     "description": [
         "marine_species_seg is an application using the DEEPaaS API.\n",
         "Write additional information for your users (how to predict, how to retrain,",
@@ -14,12 +14,12 @@
     "date_creation": "2023-02-02",
     "sources": {
 		"dockerfile_repo": "https://github.com/jmbIFR/DEEP-OC-marine_species_seg",
-		"docker_registry_repo": "deephdc/uc-jb06098-deep-oc-marine_species_seg",
+		"docker_registry_repo": "deephdc/uc-jmbIFR-deep-oc-marine_species_seg",
 		"code": "https://github.com/jmbIFR/marine_species_seg"
 	},
     "continuous_integration": {
-        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/UC-jb06098-DEEP-OC-marine_species_seg/master",
-        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/UC-jb06098-DEEP-OC-marine_species_seg/job/master"
+        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/UC-jmbIFR-DEEP-OC-marine_species_seg/master",
+        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/UC-jmbIFR-DEEP-OC-marine_species_seg/job/master"
     },
     "tosca": [
         {
