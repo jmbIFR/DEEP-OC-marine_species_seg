@@ -3,7 +3,7 @@
 </div>
 
 # DEEP-OC-marine_species_seg
-[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/UC-jb06098-DEEP-OC-marine_species_seg/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/UC-jb06098-DEEP-OC-marine_species_seg/job/master)
+[![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/UC-jmbIFR-DEEP-OC-marine_species_seg/master)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/UC-jmbIFR-DEEP-OC-marine_species_seg/job/master)
 
 This is a container that will run the [marine_species_seg](https://github.com/jmbIFR/marine_species_seg) application leveraging the DEEP as a Service API component ([DEEPaaS API V2](https://github.com/indigo-dc/DEEPaaS)).
 
@@ -15,7 +15,7 @@ This is a container that will run the [marine_species_seg](https://github.com/jm
 To run the Docker container directly from Docker Hub and start using the API simply run the following command:
 
 ```bash
-$ docker run -ti -p 5000:5000 -p 6006:6006 -p 8888:8888 deephdc/uc-jb06098-deep-oc-marine_species_seg
+$ docker run -ti -p 5000:5000 -p 6006:6006 -p 8888:8888 deephdc/uc-jmbifr-deep-oc-marine_species_seg
 ```
 
 This command will pull the Docker container from the Docker Hub [deephdc](https://hub.docker.com/u/deephdc/) repository and start the default command (`deepaas-run --listen-ip=0.0.0.0`).
@@ -28,8 +28,8 @@ If you want to build the container directly in your machine (because you want to
 ```bash
 git clone https://github.com/jmbIFR/DEEP-OC-marine_species_seg
 cd DEEP-OC-marine_species_seg
-docker build -t deephdc/uc-jb06098-deep-oc-marine_species_seg .
-docker run -ti -p 5000:5000 -p 6006:6006 -p 8888:8888 deephdc/uc-jb06098-deep-oc-marine_species_seg
+docker build -t deephdc/uc-jmbifr-deep-oc-marine_species_seg .
+docker run -ti -p 5000:5000 -p 6006:6006 -p 8888:8888 deephdc/uc-jmbifr-deep-oc-marine_species_seg
 ```
 
 These three steps will download the repository from GitHub and will build the Docker container locally on your machine. You can inspect and modify the `Dockerfile` in order to check what is going on. For instance, you can pass the `--debug=True` flag to the `deepaas-run` command, in order to enable the debug mode.
