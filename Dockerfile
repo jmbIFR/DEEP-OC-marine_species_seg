@@ -26,6 +26,11 @@ ARG branch=master
 # If to install JupyterLab
 ARG jlab=true
 
+# Outdate ubuntu1804 used by tensorflow 2.3.3 need a updated apt key to install cuda10.1
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list && \
+    apt-key del 7fa2af80 && \
+    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -34,6 +39,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         nano \
         python3-pip \
         python3-venv \
+        cuda-toolkit-10-1 \
     && rm -rf /var/lib/apt/lists/*
 
 
