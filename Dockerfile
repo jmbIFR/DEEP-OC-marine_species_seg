@@ -11,7 +11,7 @@
 # [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside the
 # Jenkinsfile, not here!
 
-ARG tag=2.11.0
+ARG tag=2.3.3
 
 # Base image, e.g. tensorflow/tensorflow:2.9.1
 FROM tensorflow/tensorflow:${tag}
@@ -71,7 +71,7 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install DEEPaaS from source until 2.1 release is made to PyPi
-RUN pip3 install --no-cache-dir --upgrade git+https://github.com/indigo-dc/deepaas.git@master
+RUN pip3 install --no-cache-dir --upgrade deepaas==1.3.0
 
 # Initialization scripts
 RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
