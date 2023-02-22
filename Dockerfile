@@ -26,18 +26,6 @@ ARG branch=master
 # If to install JupyterLab
 ARG jlab=true
 
-ARG tag
-
-RUN echo ${tag}
-
-SHELL ["/bin/bash", "-c"]
-
-# Update the cuda package
-RUN if [[ ${tag} == *gpu* ]] ; \
-then \
-apt-get update && apt-get install -y --no-install-recommends cuda-11-2 ; \
-fi
-
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
