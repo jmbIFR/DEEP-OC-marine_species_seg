@@ -27,9 +27,16 @@ ARG branch=master
 ARG jlab=true
 
 # Outdate ubuntu1804 used by tensorflow 2.3.3 need a updated apt key to install cuda10.1
-RUN rm /etc/apt/sources.list.d/nvidia-ml.list && \
+ARG tag
+RUN if [[ ${tag} == *gpu* ]] ; \
+then \
+    rm -f /etc/apt/sources.list.d/nvidia-ml.list && \
     apt-key del 7fa2af80 && \
-    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub  && \
+    DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get install -y --no-install-recommends \
+        cuda-toolkit-10-1 ; \
+fi
 
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -39,7 +46,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         nano \
         python3-pip \
         python3-venv \
-        cuda-toolkit-10-1 \
     && rm -rf /var/lib/apt/lists/*
 
 
