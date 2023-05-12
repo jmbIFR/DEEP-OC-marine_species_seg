@@ -8,13 +8,14 @@
 # or using default args:
 # $ docker build -t <dockerhub_user>/<dockerhub_repo> .
 #
+
+
 # [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside the
 # Jenkinsfile, not here!
-
-ARG tag=2.3.3
+ARG tag=1.9.0-cuda10.2-cudnn7-runtime
 
 # Base image, e.g. tensorflow/tensorflow:2.9.1
-FROM tensorflow/tensorflow:${tag}
+FROM pytorch/pytorch:${tag}
 
 LABEL maintainer='Jean-Marie BAUDET'
 LABEL version='0.0.1'
@@ -26,27 +27,25 @@ ARG branch=master
 # If to install JupyterLab
 ARG jlab=true
 
-# Outdate ubuntu1804 used by tensorflow 2.3.3 need a updated apt key to install cuda10.1
-ARG tag
-RUN if [[ ${tag} == *gpu* ]] ; \
-then \
-    rm -f /etc/apt/sources.list.d/nvidia-ml.list && \
-    apt-key del 7fa2af80 && \
-    apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub  && \
-    DEBIAN_FRONTEND=noninteractive apt-get update && \
-    apt-get install -y --no-install-recommends \
-        cuda-toolkit-10-1 ; \
-fi
-
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
         git \
+        gnupg \
         curl \
         nano \
         python3-pip \
         python3-venv \
-    && rm -rf /var/lib/apt/lists/*
+        software-properties-common \
+        wget
+
+# Install cuda packages deep-hdc require cuda-10.2
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin && \
+    mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600   && \
+    wget -qO- https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub| tee /etc/apt/trusted.gpg.d/cuda-ubuntu1804-3bf863cc.asc  && \
+    add-apt-repository -y "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"  && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install cuda-10-2
+
 
 
 # Create and activate python virtual env

@@ -9,8 +9,8 @@ pipeline {
 
     environment {
         dockerhub_repo = "deephdc/uc-jmbifr-deep-oc-marine_species_seg"
-        base_cpu_tag = "2.3.3"
-        base_gpu_tag = "2.3.3-gpu"
+        base_cpu_tag = "1.9.0-cuda10.2-cudnn7-runtime"
+        base_gpu_tag = "1.9.0-cuda10.2-cudnn7-runtime"
     }
 
     stages {
