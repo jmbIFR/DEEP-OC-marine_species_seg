@@ -59,3 +59,4 @@ You can validate the `metadata.json` before making a git push using:
 pip install git+https://github.com/deephdc/schema4apps
 deep-app-schema-validator metadata.json
 ```
+
