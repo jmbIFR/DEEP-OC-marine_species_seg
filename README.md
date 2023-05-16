@@ -60,3 +60,4 @@ pip install git+https://github.com/deephdc/schema4apps
 deep-app-schema-validator metadata.json
 ```
 
+
