@@ -34,8 +34,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         gnupg \
         curl \
         nano \
+        vim \
         python3-pip \
-        python3-venv \
+        python3.8-venv \
         software-properties-common \
         wget
 
@@ -49,7 +50,7 @@ RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86
 
 
 # Create and activate python virtual env
-RUN python3 -m venv --system-site-packages /srv/.py-venv
+RUN python3.8 -m venv --system-site-packages /srv/.py-venv
 
 RUN echo ". /srv/.py-venv/bin/activate" > ~/.bashrc && \
     echo "PATH=/srv/.py-venv/bin/:$PATH" > ~/.profile
@@ -81,8 +82,8 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
-# Install DEEPaaS from source until 2.1 release is made to PyPi
-RUN pip3 install --no-cache-dir --upgrade deepaas==1.3.0
+# Install DEEPaaS
+RUN pip3 install  --no-cache-dir --upgrade deepaas==2.1.0
 
 # Initialization scripts
 RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
@@ -95,7 +96,7 @@ ENV JUPYTER_CONFIG_DIR /srv/.deep-start/
 ENV SHELL /bin/bash
 RUN if [ "$jlab" = true ]; then \
        # by default has to work (1.2.0 wrongly required nodejs and npm)
-       pip3 install --no-cache-dir jupyterlab ; \
+       pip3 install --no-cache-dir jupyterlab notebook; \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app
