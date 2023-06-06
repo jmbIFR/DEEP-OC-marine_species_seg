@@ -12,13 +12,13 @@
 
 # [!] Note: For the Jenkins CI/CD pipeline, input args are defined inside the
 # Jenkinsfile, not here!
-ARG tag=1.9.0-cuda10.2-cudnn7-runtime
+ARG tag=1.7.1-cuda11.0-cudnn8-runtime
 
 # Base image, e.g. tensorflow/tensorflow:2.9.1
 FROM pytorch/pytorch:${tag}
 
 LABEL maintainer='Jean-Marie BAUDET'
-LABEL version='0.0.1'
+LABEL version='0.0.2'
 # WIP : Identification of marine species from EMSO Azores deep-sea obervatory
 
 # What user branch to clone [!]
@@ -35,27 +35,29 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         curl \
         nano \
         vim \
-        python3-pip \
-        python3.8-venv \
         software-properties-common \
         wget
 
-# Install cuda packages deep-hdc require cuda-10.2
+# Install cuda packages deep-hdc require cuda-10.1 (optional stage : provide nvidia-smi and other tools )
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin && \
     mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600   && \
     wget -qO- https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub| tee /etc/apt/trusted.gpg.d/cuda-ubuntu1804-3bf863cc.asc  && \
     add-apt-repository -y "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"  && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install cuda-10-2
+    DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install cuda-10-1
 
 
 
-# Create and activate python virtual env
-RUN python3.8 -m venv --system-site-packages /srv/.py-venv
+# packages deep-hdc require cuda-10.1 -> so pytorch is 1.7.1 is the maximum possible version
+# python 3.8 required by yolo v5
+RUN conda install python==3.8.5 pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch
 
+
+# Create python virtual env
+RUN python3 -m venv --system-site-packages /srv/.py-venv
+
+# Activate python virtual env
 RUN echo ". /srv/.py-venv/bin/activate" > ~/.bashrc && \
-    echo "PATH=/srv/.py-venv/bin/:$PATH" > ~/.profile
-
-ENV PATH /srv/.py-venv/bin/:$PATH
+    . ~/.bashrc
 
 # Update python packages
 # [!] Remember: DEEP API V2 only works with python>=3.6
